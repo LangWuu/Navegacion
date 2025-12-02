@@ -1,0 +1,309 @@
+/* =================================
+   Utility Classes
+   ================================= */
+
+/* Text Utilities */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-light {
+  color: var(--text-light);
+}
+
+.text-white {
+  color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.font-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+/* Display Utilities */
+.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Flex Utilities */
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+/* Spacing Utilities */
+.m-0 {
+  margin: 0;
+}
+
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+
+.mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.p-sm {
+  padding: var(--spacing-sm);
+}
+
+.p-md {
+  padding: var(--spacing-md);
+}
+
+.p-lg {
+  padding: var(--spacing-lg);
+}
+
+.px-md {
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+.py-md {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+}
+
+/* Width Utilities */
+.w-full {
+  width: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.max-w-sm {
+  max-width: 640px;
+}
+
+.max-w-md {
+  max-width: 768px;
+}
+
+.max-w-lg {
+  max-width: 1024px;
+}
+
+.max-w-xl {
+  max-width: 1280px;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: var(--spacing-xl);
+    padding-right: var(--spacing-xl);
+  }
+}
+
+/* Background Utilities */
+.bg-white {
+  background-color: var(--surface);
+}
+
+.bg-gray {
+  background-color: var(--background);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+/* Border Utilities */
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.rounded-md {
+  border-radius: var(--radius-md);
+}
+
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.rounded-xl {
+  border-radius: var(--radius-xl);
+}
+
+.rounded-full {
+  border-radius: var(--radius-full);
+}
+
+/* Shadow Utilities */
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow {
+  box-shadow: var(--shadow);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Transition Utilities */
+.transition-all {
+  transition: all var(--transition-base);
+}
+
+/* Visibility */
+@media (max-width: 640px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .show-mobile-only {
+    display: none !important;
+  }
+}

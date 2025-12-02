@@ -1,0 +1,115 @@
+/* Same structure as Explorar but with different header color */
+.favoritos {
+    min-height: 100vh;
+    background-color: var(--background);
+    padding-bottom: 70px;
+}
+
+.favoritos__header {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border-light);
+    padding: var(--spacing-lg);
+}
+
+.favoritos__header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.favoritos__back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.favoritos__title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+}
+
+.favoritos__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.favoritos__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.favoritos__empty {
+    text-align: center;
+    padding: var(--spacing-3xl);
+    background-color: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.favoritos__empty-icon {
+    font-size: 4rem;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+.favoritos__empty-text {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Nav same as explorar */
+.favoritos__nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--surface);
+    border-top: 1px solid var(--border-light);
+    padding: var(--spacing-sm) 0;
+}
+
+.favoritos__nav-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.favoritos__nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--spacing-sm);
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.favoritos__nav-item--active {
+    color: var(--primary);
+}
+
+.favoritos__nav-icon {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .favoritos__grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,146 @@
+/* ===== PÁGINA DE REGISTRO ===== */
+
+.register {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: #f8f8f8;
+}
+
+.register__container {
+  width: 100%;
+  max-width: 540px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 48px;
+}
+
+/* ===== HEADER (Título motivacional) ===== */
+
+.register__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.register__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2121;
+  line-height: 1.4;
+}
+
+/* ===== MENSAJES DE ÉXITO O ERROR ===== */
+
+.register__message {
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.register__message--success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.register__message--error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+/* ===== FORMULARIO ===== */
+
+.register__form {
+  margin-top: 32px;
+}
+
+/* Fila con dos campos lado a lado */
+.register__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.register__input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.register__input-group--full {
+  margin-bottom: 24px;
+}
+
+/* Estilos del select (dropdown) */
+select.input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23626c71' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+select.input:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300A699' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+/* ===== BOTÓN DE REGISTRARSE ===== */
+
+.register__submit {
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 32px;
+}
+
+/* ===== FOOTER (Link a login) ===== */
+
+.register__footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+.register__footer-text {
+  font-size: 14px;
+  color: #626c71;
+}
+
+.register__footer-link {
+  color: #00A699;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.register__footer-link:hover {
+  color: #008489;
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE (Móvil) ===== */
+
+@media (max-width: 640px) {
+  .register {
+    padding: 16px;
+  }
+
+  .register__container {
+    padding: 32px 24px;
+  }
+
+  /* En móvil, los campos van uno abajo del otro */
+  .register__row {
+    grid-template-columns: 1fr;
+  }
+
+  .register__title {
+    font-size: 18px;
+  }
+}

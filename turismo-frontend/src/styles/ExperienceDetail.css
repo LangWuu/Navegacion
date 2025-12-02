@@ -1,0 +1,137 @@
+.experience-detail {
+    min-height: 100vh;
+    background-color: var(--background);
+}
+
+.experience-detail__hero {
+    position: relative;
+    height: 400px;
+    background-color: var(--border-light);
+}
+
+.experience-detail__hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.experience-detail__back {
+    position: absolute;
+    top: var(--spacing-lg);
+    left: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+.experience-detail__price-badge {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background-color: white;
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-semibold);
+    box-shadow: var(--shadow);
+}
+
+.experience-detail__content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.experience-detail__title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.experience-detail__location {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+.experience-detail__info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.experience-detail__info-item {
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+}
+
+.experience-detail__info-icon {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.experience-detail__section {
+    background-color: var(--surface);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    margin-bottom: var(--spacing-lg);
+}
+
+.experience-detail__section-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.experience-detail__footer {
+    background-color: var(--surface);
+    border-top: 1px solid var(--border-light);
+    padding: var(--spacing-lg);
+    position: sticky;
+    bottom: 0;
+}
+
+.experience-detail__footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+}
+
+.experience-detail__book-button {
+    padding: var(--spacing-md) var(--spacing-2xl);
+}
+
+@media (max-width: 640px) {
+    .experience-detail__hero {
+        height: 300px;
+    }
+
+    .experience-detail__info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experience-detail__footer-content {
+        flex-direction: column;
+    }
+
+    .experience-detail__book-button {
+        width: 100%;
+    }
+}
