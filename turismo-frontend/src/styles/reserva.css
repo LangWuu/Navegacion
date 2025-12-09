@@ -1,0 +1,142 @@
+
+.reserva {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: #f8f8f8;
+}
+
+.reserva__container {
+  width: 100%;
+  max-width: 540px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 48px;
+}
+
+/* ===== HEADER ===== */
+
+.reserva__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.reserva__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2121;
+  line-height: 1.4;
+}
+
+/* ===== MENSAJES ===== */
+
+.reserva__message {
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.reserva__message--success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.reserva__message--error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+/* ===== FORMULARIO ===== */
+
+.reserva__form {
+  margin-top: 32px;
+}
+
+.reserva__input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.reserva__label {
+  font-size: 14px;
+  color: #626c71;
+  margin-bottom: 8px;
+}
+
+.reserva__input,
+.reserva__textarea {
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  background-color: #fafafa;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1f2121;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.reserva__input:focus,
+.reserva__textarea:focus {
+  border-color: #00A699;
+  background-color: #fff;
+  outline: none;
+}
+
+.reserva__textarea {
+  min-height: 110px;
+  resize: none;
+}
+
+/* ===== BOTÓN ===== */
+
+.reserva__submit {
+  width: 100%;
+  background-color: #00A699;
+  color: white;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.reserva__submit:hover {
+  background-color: #008e84;
+}
+
+/* ===== INFO EXTRA (ID de experiencia) ===== */
+
+.reserva__info {
+  font-size: 14px;
+  color: #626c71;
+  background: #f1f1f1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 640px) {
+  .reserva {
+    padding: 16px;
+  }
+
+  .reserva__container {
+    padding: 32px 24px;
+  }
+
+  .reserva__title {
+    font-size: 18px;
+  }
+}
