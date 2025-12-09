@@ -59,7 +59,7 @@ const Dashboard = () => {
     // Función para cerrar sesión
     const handleLogout = () => {
         logout();
-        navigate('/login');
+        navigate('/');
     };
 
 
@@ -159,6 +159,13 @@ const Dashboard = () => {
                     >
                         <HiUser className="dashboard__nav-icon" />
                         <span>Perfil</span>
+                    </button>
+                    <button
+                        className="dashboard__nav-item dashboard__nav-item--logout"
+                        onClick={handleLogout}
+                    >
+                        <HiLogout className="dashboard__nav-icon" />
+                        <span>Salir</span>
                     </button>
                 </div>
             </nav>

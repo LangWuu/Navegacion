@@ -145,6 +145,14 @@
     color: var(--primary);
 }
 
+.dashboard__nav-item--logout {
+    color: var(--error);
+}
+
+.dashboard__nav-item--logout:hover {
+    color: var(--primary-dark);
+}
+
 .dashboard__nav-icon {
     font-size: 1.5rem;
 }

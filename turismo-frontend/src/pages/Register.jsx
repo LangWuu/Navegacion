@@ -298,6 +298,15 @@ export default function Register() {
 
 
         <div className="register__footer">
+          <button
+            className="btn btn--secondary btn--full"
+            type="button"
+            onClick={() => navigate('/')}
+            style={{ marginBottom: '16px' }}
+          >
+            Volver a Inicio
+          </button>
+
           <p className="register__footer-text">
             ¿Ya tienes cuenta?{" "}
             <Link to="/login" className="register__footer-link">
