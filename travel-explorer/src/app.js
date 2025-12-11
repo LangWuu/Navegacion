@@ -5,12 +5,18 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import connectDB from './config/db.js';
+
+// Rutas
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import experienceRoutes from './routes/experienceRoutes.js';
 import routeRoutes from './routes/routeRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 import badgeRoutes from './routes/badgeRoutes.js';
+import guiaRoutes from "./routes/guiaRoutes.js"; // Importado del remoto
+
+// Middlewares
+import errorHandler from "./middlewares/errorHandler.js"; // Importado del remoto
 
 dotenv.config();
 
@@ -23,9 +29,9 @@ connectDB();
 
 const app = express();
 
-// los middlewares
 app.use(cors());
-app.use(express.json()); //trecibimos json
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 app.use(morgan('dev'));
 
 // servir archivos estáticos (imágenes subidas)
@@ -38,13 +44,13 @@ app.use('/api/experiences', experienceRoutes);
 app.use('/api/routes', routeRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/badges', badgeRoutes);
+app.use('/api/guia', guiaRoutes); // Ruta de guías
 
-// error  simple
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Ocurrió un error en el servidor' });
-});
+// Manejo de errores (Este se mantuvo en la versión remota, lo conservamos)
+app.use(errorHandler);
 
-// servidor
+// Servidor
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(` Servidor corriendo en puerto ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Servidor corriendo en puerto ${PORT}`)
+);
