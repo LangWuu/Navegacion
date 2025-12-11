@@ -1,13 +1,106 @@
 /* Global Layout Container */
-#root {
+:root {
+    /* Colores de Explora */
+    --primary-teal: #2a9d8f;        /* Teal principal */
+    --primary-teal-light: #32b8c6;  /* Teal más claro */
+    --primary-teal-dark: #1a6d62;   /* Teal oscuro */
+    --accent-gold: #e9c46a;         /* Dorado */
+    --accent-gold-dark: #d4a53c;    /* Dorado oscuro */
+    --dark-bg: #1a3a40;             /* Fondo oscuro (como logo) */
+    --light-bg: #f0f7f8;            /* Fondo claro con toque teal */
+    --text-primary: #1a3a40;        /* Texto oscuro */
+    --text-secondary: #5a7a82;      /* Texto secundario */
+    --card-bg: #ffffff;             /* Blanco puro */
+    --card-shadow: rgba(42, 157, 143, 0.12);
+    --border-color: #e0f2f1;        /* Borde teal suave */
+}
+
+/* Contenedor principal de la aplicación */
+.app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  background-color: #f8fafc;
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
 }
+
+/* Contenido principal */
+.main-content {
+  flex: 1;
+  padding-top: 70px; /* Altura del Navbar */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 2rem; /* Espacio inferior para el contenido */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 70px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 60px;
+    padding-bottom: 50px;
+  }
+}
+
+/* Estilos para los enlaces */
+a {
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Estilos para botones */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Clases de utilidad */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
 
 /* Remove default Vite styles */
 .logo {
@@ -20,4 +113,14 @@
 
 .read-the-docs {
   display: none;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
 }

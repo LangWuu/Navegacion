@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* --- Variables (Añadidas para completitud, asumiendo su uso en el código original) --- */
+:root {
+    --primary-teal: #2a9d8f;
+    --primary-teal-light: #42b8a7;
+    --primary-teal-dark: #1e786b;
+    --accent-gold: #e9c46a;
+    --accent-gold-dark: #d4ac4a;
+    --light-bg: #f8f9fa;
+    --text-primary: #264653;
+    --text-secondary: #4a6c76;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* --- Estilos Generales --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+    background-color: var(--light-bg);
+}
+
+/* --- Sección Hero con Imagen de Fondo --- */
+.about-us-hero {
+    /* La imagen de fondo se maneja en el JSX */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
+    margin-bottom: 60px;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-us-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top right, rgba(50, 184, 198, 0.1), transparent);
+    pointer-events: none;
+}
+
+.hero-text-content {
+    background: rgba(26, 58, 64, 0.4);
+    backdrop-filter: blur(8px);
+    padding: 40px 50px;
+    border-radius: 15px;
+    border: 1px solid rgba(233, 196, 106, 0.2);
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    box-shadow: 0 8px 32px rgba(26, 58, 64, 0.2);
+}
+
+.hero-text-content h1 {
+    color: #ffffff;
+    font-size: 3.2em;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(26, 58, 64, 0.6);
+    letter-spacing: -1px;
+}
+
+.hero-text-content p {
+    font-size: 1.25em;
+    font-weight: 300;
+    text-shadow: 1px 1px 4px rgba(26, 58, 64, 0.5);
+    line-height: 1.8;
+}
+
+/* --- Contenido Principal (GRID) --- */
+.about-us-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+    padding: 0 5% 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content-card {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px var(--card-shadow);
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.320, 1);
+    border-left: 5px solid var(--primary-teal);
+    position: relative;
+    overflow: hidden;
+}
+
+.content-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-teal), var(--accent-gold));
+}
+
+.content-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(42, 157, 143, 0.2);
+}
+
+.content-card h2 {
+    color: var(--primary-teal-dark);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content-card h2::before {
+    content: '';
+    width: 4px;
+    height: 28px;
+    background: linear-gradient(180deg, var(--primary-teal), var(--accent-gold));
+    border-radius: 2px;
+}
+
+.content-card p {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+.content-card ul {
+    list-style: none;
+}
+
+.content-card ul li {
+    margin-bottom: 12px;
+    padding-left: 28px;
+    position: relative;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.content-card ul li:hover {
+    color: var(--primary-teal);
+    padding-left: 35px;
+}
+
+.content-card ul li::before {
+    content: '✓';
+    color: var(--accent-gold);
+    position: absolute;
+    left: 0;
+    font-size: 1.3em;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(42, 157, 143, 0.1);
+}
+
+/* --- Sección Equipo CORREGIDA --- */
+
+/* 🚨 CLAVE: Forzamos a la tarjeta del equipo a ocupar todo el ancho del grid */
+.about-us-content .team-card {
+    grid-column: 1 / -1; /* Ocupa de la primera a la última columna del grid */
+    padding: 0; /* Quitamos el padding para que los miembros internos puedan centrarse */
+    box-shadow: none; /* Quitamos la sombra de la tarjeta exterior */
+    border-left: none; /* Quitamos el borde de la tarjeta exterior */
+    background-color: transparent; /* Fondo transparente */
+}
+
+/* Restauramos y centramos el estilo del título */
+.team-card h2 {
+    text-align: center;
+    padding-top: 40px; 
+    margin-bottom: 40px;
+    justify-content: center; /* Centramos el icono/barra con el texto */
+}
+
+/* Eliminamos el decorador de barra vertical del título, ya que ahora está centrado */
+.team-card h2::before {
+    content: none; 
+}
+
+/* ➡️ Contenedor de miembros (FLEX: horizontal y centrado) */
+.team-members-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    gap: 35px;
+    margin-top: 20px; 
+    padding-bottom: 40px; 
+}
+
+.team-member {
+    /* ESTA ES LA TARJETA INDIVIDUAL DE CADA MIEMBRO */
+    flex-basis: auto; 
+    min-width: 200px;
+    max-width: 220px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding: 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: var(--card-bg); /* Fondo blanco para las tarjetas internas */
+    box-shadow: 0 2px 15px var(--card-shadow); /* Sombra para las tarjetas internas */
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(42, 157, 143, 0.2);
+}
+
+.member-photo-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, var(--primary-teal-light), var(--primary-teal));
+    background-size: cover;
+    background-position: center;
+    border: 4px solid var(--accent-gold);
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(42, 157, 143, 0.25);
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover .member-photo-img {
+    transform: scale(1.05);
+    border-color: var(--accent-gold-dark);
+}
+
+.team-member h3 {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: var(--primary-teal-dark);
+    font-weight: 700;
+}
+
+.team-member p {
+    font-size: 0.95em;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* --- Botón CTA --- */
+.cta-container {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(42, 157, 143, 0.08) 0%, rgba(233, 196, 106, 0.05) 100%);
+    border-radius: 15px;
+    margin: 60px 5%;
+}
+
+.cta-container h2 {
+    color: var(--primary-teal-dark);
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-light));
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, var(--primary-teal-dark), var(--primary-teal));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(42, 157, 143, 0.4);
+}
+
+.cta-button:active {
+    transform: translateY(-1px);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .about-us-hero {
+        padding: 80px 20px;
+        min-height: 400px;
+        margin-bottom: 40px;
+    }
+
+    .hero-text-content {
+        padding: 30px 30px;
+    }
+
+    .hero-text-content h1 {
+        font-size: 2.2em;
+        margin-bottom: 15px;
+    }
+
+    .hero-text-content p {
+        font-size: 1.05em;
+    }
+
+    .about-us-content {
+        grid-template-columns: 1fr;
+        padding: 0 4% 60px;
+        gap: 25px;
+    }
+
+    .content-card {
+        padding: 30px;
+    }
+
+    .content-card h2 {
+        font-size: 1.5em;
+    }
+
+    /* 🚨 Responsive Team: Aseguramos la horizontalidad */
+    .team-members-container {
+        flex-direction: row; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 20px; /* Reducir gap en móvil */
+    }
+
+    .team-member {
+        /* Forzamos 2 tarjetas por fila */
+        flex-basis: calc(50% - 10px); 
+        max-width: calc(50% - 10px); 
+        min-width: 140px; 
+    }
+
+    .member-photo-img {
+        width: 100px; 
+        height: 100px;
+    }
+
+    .cta-container {
+        padding: 40px 20px;
+        margin: 40px 4%;
+    }
+
+    .cta-button {
+        width: 100%;
+        padding: 14px 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-us-hero {
+        padding: 60px 15px;
+        min-height: 300px;
+        margin-bottom: 30px;
+    }
+
+    .hero-text-content {
+        padding: 20px 20px;
+        border-radius: 10px;
+    }
+
+    .hero-text-content h1 {
+        font-size: 1.8em;
+        margin-bottom: 12px;
+        letter-spacing: 0;
+    }
+
+    .hero-text-content p {
+        font-size: 0.95em;
+    }
+
+    .about-us-content {
+        padding: 0 3% 40px;
+        gap: 15px;
+    }
+
+    .content-card {
+        padding: 25px;
+    }
+
+    .content-card h2 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    .content-card ul li {
+        padding-left: 24px;
+        margin-bottom: 10px;
+    }
+
+    .team-card h2 {
+        font-size: 1.7em;
+    }
+    
+    .team-member {
+        /* Mantenemos dos por fila */
+        flex-basis: calc(50% - 7.5px); /* Ajuste para el gap de 15px */
+        max-width: calc(50% - 7.5px);
+        min-width: 120px;
+    }
+
+    .member-photo-img {
+        width: 80px; 
+        height: 80px;
+        margin-bottom: 12px;
+    }
+
+    .team-member h3 {
+        font-size: 1.05em;
+    }
+
+    .team-member p {
+        font-size: 0.9em;
+    }
+
+    .cta-container {
+        padding: 30px 15px;
+        margin: 30px 3%;
+    }
+
+    .cta-container h2 {
+        font-size: 1.5em;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 0.95em;
+    }
+}

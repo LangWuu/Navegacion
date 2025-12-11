@@ -1,33 +1,66 @@
-import React from 'react';
-import './Input.css';
+import React from 'react'
+import './Input.css'
 
-// Componente para los inputs del formulario
 const Input = ({
-    label,
-    type = 'text',
-    name,
-    value,
-    onChange,
-    placeholder,
-    error,
-    disabled = false
+  type = 'text',
+  name,
+  value,
+  onChange,
+  placeholder,
+  label,
+  error,
+  required = false,
+  disabled = false,
+  icon: Icon,
+  ...props
 }) => {
-    return (
-        <div className="input-wrapper">
-            {label && <label className="input-label">{label}</label>}
-            <input
-                className={`input ${error ? 'input--error' : ''}`}
-                type={type}
-                name={name}
-                value={value}
-                onChange={onChange}
-                placeholder={placeholder}
-                disabled={disabled}
-            />
-            {/* Si hay error, lo mostramos aquí abajito */}
-            {error && <span className="input-error-message">{error}</span>}
-        </div>
-    );
-};
+  return (
+    <div className="input-group">
+      {label && (
+        <label htmlFor={name} className="input-label">
+          {label}
+          {required && <span className="input-required">*</span>}
+        </label>
+      )}
+      <div className="input-wrapper">
+        {Icon && <Icon className="input-icon" />}
+        {type === 'textarea' ? (
+          <textarea
+            name={name}
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+            disabled={disabled}
+            className={`input ${Icon ? 'input--with-icon' : ''} ${error ? 'input--error' : ''}`}
+            {...props}
+          />
+        ) : type === 'select' ? (
+          <select
+            name={name}
+            value={value}
+            onChange={onChange}
+            disabled={disabled}
+            className={`input ${Icon ? 'input--with-icon' : ''} ${error ? 'input--error' : ''}`}
+            {...props}
+          >
+            {props.children}
+          </select>
+        ) : (
+          <input
+            type={type}
+            name={name}
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+            disabled={disabled}
+            className={`input ${Icon ? 'input--with-icon' : ''} ${error ? 'input--error' : ''}`}
+            {...props}
+          />
+        )}
+      </div>
+      {error && <span className="input-error-message">{error}</span>}
+    </div>
+  )
+}
 
-export default Input;
+export default Input

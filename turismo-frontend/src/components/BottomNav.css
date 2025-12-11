@@ -1,0 +1,119 @@
+/* ==================================================== */
+/* ===== BARRA DE NAVEGACIÓN INFERIOR (BottomNav) ===== */
+/* ==================================================== */
+
+.bottom-nav {
+    /* 🚨 CLAVE: Ocultar por defecto (solo se mostrará en la media query móvil) */
+    display: none; 
+
+    position: fixed;
+    left: 50%;
+    right: auto;
+    bottom: 10px; /* Flotando 10px por encima */
+    z-index: 100;
+    
+    /* Efecto de Vidrio Esmerilado (Frosted Glass) */
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    
+    max-width: 500px; /* Ancho máximo en escritorio/flotante */
+    height: 74px;
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 -4px 24px rgba(30, 41, 59, 0.13), 0 -1px 1px rgba(0, 0, 0, 0.05);
+    border-top: 1.5px solid #e0e7ef;
+    
+    /* Propiedades de Flexbox (necesarias para el centrado, pero el 'display' lo controlamos en el responsive) */
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    
+    /* Centrado Horizontal Avanzado */
+    transform: translateX(-50%);
+}
+
+.bottom-nav button {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-size: 1.35rem; /* Tamaño del icono */
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+    position: relative;
+    height: 100%;
+    margin: 0 2px;
+}
+
+.bottom-nav button .nav-icon-bg {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.10);
+    margin-bottom: 2px;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.bottom-nav button.active .nav-icon-bg {
+    /* Fondo azul con degradado para el estado activo */
+    background: linear-gradient(135deg, #2563eb 60%, #60a5fa 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.13);
+}
+
+.bottom-nav button.active .nav-icon-bg svg {
+    color: #fff;
+}
+
+.bottom-nav button span {
+    font-size: 0.82rem;
+    margin-top: 2px;
+    letter-spacing: 0.01em;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.bottom-nav button.active span {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.bottom-nav button:active .nav-icon-bg,
+.bottom-nav button:focus .nav-icon-bg {
+    box-shadow: 0 2px 18px #2563eb44;
+    outline: none;
+}
+
+/* =============================================== */
+/* ===== RESPONSIVE: Adaptación a Móvil (Mobile) ===== */
+/* =============================================== */
+
+@media (max-width: 700px) {
+    .bottom-nav {
+        /* 🚨 CLAVE: Mostrar la barra SÓLO en pantallas pequeñas */
+        display: flex; 
+        
+        /* Ocupa todo el ancho en móvil */
+        max-width: 100vw;
+        
+        /* Redondeo solo en la parte superior */
+        border-radius: 18px 18px 0 0;
+        
+        /* Anclado completamente al borde inferior */
+        bottom: 0px; 
+        left: 0;
+        
+        /* Deshacer el centrado avanzado (transform: translateX(-50%)) */
+        transform: none; 
+    }
+}

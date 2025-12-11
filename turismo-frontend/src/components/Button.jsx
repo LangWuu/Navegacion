@@ -1,26 +1,33 @@
-import React from 'react';
-import './Button.css';
+import React from 'react'
+import './Button.css'
 
-// Componente reutilizable de botón
-// variant puede ser 'primary', 'secondary' o 'outline'
 const Button = ({
-    children,
-    onClick,
-    type = 'button',
-    variant = 'primary',
-    className = '',
-    disabled = false
+  children,
+  onClick = () => {},
+  type = 'button',
+  variant = 'primary',
+  size,
+  fullWidth = false,
+  className = '',
+  disabled = false,
+  icon: Icon,
 }) => {
-    return (
-        <button
-            type={type}
-            className={`btn btn--${variant} ${className}`}
-            onClick={onClick}
-            disabled={disabled}
-        >
-            {children}
-        </button>
-    );
-};
+  const classes = [
+    'btn',
+    `btn--${variant}`,
+    size ? `btn--${size}` : '',
+    fullWidth ? 'btn--full' : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ')
 
-export default Button;
+  return (
+    <button type={type} className={classes} onClick={onClick} disabled={disabled}>
+      {Icon && <Icon className="btn__icon" />}
+      {children}
+    </button>
+  )
+}
+
+export default Button

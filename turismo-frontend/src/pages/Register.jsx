@@ -1,14 +1,20 @@
 import { useState } from "react";
 import api from "../api/axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import "../styles/register.css";
-
+import { validateRequired } from "../utils/validateForm";
+import Message from "../components/Message";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function Register() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
+  // Tomamos el rol desde la URL
+  const rolFromUrl = searchParams.get('rol') || 'turista';
 
-  // Aquí guardamos los datos del nuevo usuario
+  // Estado del formulario
   const [form, setForm] = useState({
     nombre: "",
     apellido: "",
@@ -17,25 +23,23 @@ export default function Register() {
     fechaNacimiento: "",
     genero: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    rol: rolFromUrl
   });
 
-
-  // Estados para mostrar si hubo error o éxito
+  // Otros estados
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
-
-  // Actualizamos el estado cuando escriben
+  // Cada que cambian un input
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({
-      ...form,
+    setForm(prev => ({
+      ...prev,
       [name]: value
-    });
+    }));
   };
-
 
   // Al enviar el formulario
   const handleSubmit = async (e) => {
@@ -43,72 +47,36 @@ export default function Register() {
     setError("");
     setSuccess("");
 
+    console.log("Datos enviados al back:", form);
 
-    console.log("Datos a enviar:", form);
+    // Validar campos requeridos
+    const requiredFields = [
+      "nombre",
+      "apellido",
+      "email",
+      "telefono",
+      "fechaNacimiento",
+      "genero",
+      "password",
+      "confirmPassword"
+    ];
 
+    const errorMsg = validateRequired(requiredFields, form);
+    if (errorMsg) return setError(errorMsg);
 
-    //  Validaciones mejoradas - TODOS los campos son obligatorios
-    if (!form.nombre.trim()) {
-      setError("El nombre es obligatorio");
-      return;
-    }
-
-    if (!form.apellido.trim()) {
-      setError("El apellido es obligatorio");
-      return;
-    }
-
-    if (!form.email.trim()) {
-      setError("El correo es obligatorio");
-      return;
-    }
-
-    if (!form.telefono.trim()) {
-      setError("El teléfono es obligatorio");
-      return;
-    }
-
-    if (!form.fechaNacimiento) {
-      setError("La fecha de nacimiento es obligatoria");
-      return;
-    }
-
-    if (!form.genero) {
-      setError("El género es obligatorio");
-      return;
-    }
-
-    if (!form.password) {
-      setError("La contraseña es obligatoria");
-      return;
-    }
-
-    if (!form.confirmPassword) {
-      setError("Debes confirmar la contraseña");
-      return;
-    }
-
-
-    // Validar que las contraseñas coincidan
+    // Validar contraseñas
     if (form.password !== form.confirmPassword) {
-      setError("Las contraseñas no coinciden");
-      return;
+      return setError("Las contraseñas no coinciden");
     }
 
-
-    // Validar longitud mínima
     if (form.password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres");
-      return;
+      return setError("La contraseña debe tener al menos 6 caracteres");
     }
-
 
     setLoading(true);
 
-
     try {
-      // Enviamos los datos al backend con los nombres CORRECTOS
-      console.log("Registrando usuario...");
+      // Petición al backend
       const response = await api.post("/auth/register", {
         nombre: form.nombre,
         apellido: form.apellido,
@@ -117,21 +85,20 @@ export default function Register() {
         fechaNacimiento: form.fechaNacimiento,
         genero: form.genero,
         password: form.password,
-        confirmPassword: form.confirmPassword
+        confirmPassword: form.confirmPassword,
+        rol: form.rol
       });
 
-
       console.log("Respuesta del servidor:", response.data);
-      setSuccess("¡Genial! Ya estás registrado. Te vamos a mandar al login...");
 
+      setSuccess("¡Genial! Ya estás registrado. Te estamos redirigiendo...");
 
-      // Esperamos un ratico y lo mandamos al login
-      setTimeout(() => navigate("/login"), 2000);
-
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
 
     } catch (err) {
       console.error("Error en registro:", err);
-      // Mensaje de error amigable
       const errorMsg = err.response?.data?.message || "No se pudo registrar, intenta más tarde";
       setError(errorMsg);
     } finally {
@@ -139,173 +106,173 @@ export default function Register() {
     }
   };
 
-
   return (
-    <div className="register">
-      <div className="register__container">
+    <>
+      <Header title="Registro" />
 
+      <div className="register">
+        <div className="register__container">
 
-        {/* Título motivador */}
-        <div className="register__header">
-          <h2 className="register__title">
-            Porque turistear no debe ser un dolor de cabeza
-          </h2>
-        </div>
-
-
-        {/* Mensajes de feedback */}
-        {error && <div className="register__message register__message--error">{error}</div>}
-        {success && <div className="register__message register__message--success">{success}</div>}
-
-
-        <form className="register__form" onSubmit={handleSubmit}>
-
-
-          {/* Nombre y Apellido en la misma línea */}
-          <div className="register__row">
-            <div className="register__input-group">
-              <label className="input-label">Nombre *</label>
-              <input
-                className="input"
-                type="text"
-                name="nombre"
-                placeholder="Tu nombre"
-                value={form.nombre}
-                onChange={handleChange}
-                disabled={loading}
-              />
-            </div>
-
-
-            <div className="register__input-group">
-              <label className="input-label">Apellido *</label>
-              <input
-                className="input"
-                type="text"
-                name="apellido"
-                placeholder="Tu apellido"
-                value={form.apellido}
-                onChange={handleChange}
-                disabled={loading}
-              />
-            </div>
+          {/* Título dinámico según el rol */}
+          <div className="register__header">
+            <h2 className="register__title">
+              {form.rol === 'guia' ? 'Regístrate como Guía' : 'Regístrate como Turista'}
+            </h2>
+            <p className="register__subtitle">
+              {form.rol === 'guia'
+                ? 'Comparte tus conocimientos y crea experiencias únicas'
+                : 'Descubre experiencias auténticas en Colombia'}
+            </p>
           </div>
 
+          {/* Mensajes */}
+          {error && <Message type="error">{error}</Message>}
+          {success && <Message type="success">{success}</Message>}
 
-          {/* Email */}
-          <div className="register__input-group register__input-group--full">
-            <label className="input-label">Correo Electrónico *</label>
-            <input
-              className="input"
-              type="email"
-              name="email"
-              placeholder="ejemplo@gmail.com"
-              value={form.email}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
+          {/* Formulario */}
+          <form className="register__form" onSubmit={handleSubmit}>
 
+            {/* Nombre y apellido */}
+            <div className="register__row">
+              <div className="register__input-group">
+                <label className="input-label">Nombre *</label>
+                <input
+                  className="input"
+                  type="text"
+                  name="nombre"
+                  placeholder="Tu nombre"
+                  value={form.nombre}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+              </div>
 
-          {/* Teléfono y Fecha de Nacimiento */}
-          <div className="register__row">
-            <div className="register__input-group">
-              <label className="input-label">Celular / Teléfono *</label>
+              <div className="register__input-group">
+                <label className="input-label">Apellido *</label>
+                <input
+                  className="input"
+                  type="text"
+                  name="apellido"
+                  placeholder="Tu apellido"
+                  value={form.apellido}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+              </div>
+            </div>
+
+            {/* Email */}
+            <div className="register__input-group register__input-group--full">
+              <label className="input-label">Correo Electrónico *</label>
               <input
                 className="input"
-                type="tel"
-                name="telefono"
-                placeholder="312 123 4567"
-                value={form.telefono}
+                type="email"
+                name="email"
+                placeholder="ejemplo@gmail.com"
+                value={form.email}
                 onChange={handleChange}
                 disabled={loading}
               />
             </div>
 
+            {/* Teléfono y fecha */}
+            <div className="register__row">
+              <div className="register__input-group">
+                <label className="input-label">Celular / Teléfono *</label>
+                <input
+                  className="input"
+                  type="tel"
+                  name="telefono"
+                  placeholder="312 123 4567"
+                  value={form.telefono}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+              </div>
 
-            <div className="register__input-group">
-              <label className="input-label">Fecha de Nacimiento *</label>
-              <input
+              <div className="register__input-group">
+                <label className="input-label">Fecha de Nacimiento *</label>
+                <input
+                  className="input"
+                  type="date"
+                  name="fechaNacimiento"
+                  value={form.fechaNacimiento}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+              </div>
+            </div>
+
+            {/* Género */}
+            <div className="register__input-group register__input-group--full">
+              <label className="input-label">Género *</label>
+              <select
                 className="input"
-                type="date"
-                name="fechaNacimiento"
-                value={form.fechaNacimiento}
+                name="genero"
+                value={form.genero}
                 onChange={handleChange}
                 disabled={loading}
-              />
+              >
+                <option value="">Selecciona...</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+              </select>
             </div>
-          </div>
 
+            {/* Contraseñas */}
+            <div className="register__row">
+              <div className="register__input-group">
+                <label className="input-label">Contraseña *</label>
+                <input
+                  className="input"
+                  type="password"
+                  name="password"
+                  placeholder="Mínimo 6 caracteres"
+                  value={form.password}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+              </div>
 
-          {/* Género */}
-          <div className="register__input-group register__input-group--full">
-            <label className="input-label">Género *</label>
-            <select
-              className="input"
-              name="genero"
-              value={form.genero}
-              onChange={handleChange}
+              <div className="register__input-group">
+                <label className="input-label">Confirmar Contraseña *</label>
+                <input
+                  className="input"
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Repíte la contraseña"
+                  value={form.confirmPassword}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+              </div>
+            </div>
+
+            {/* Botón */}
+            <button
+              className="btn btn--primary btn--full"
+              type="submit"
               disabled={loading}
             >
-              <option value="">Selecciona...</option>
-              <option value="masculino">Masculino</option>
-              <option value="femenino">Femenino</option>
-              <option value="otro">Otro</option>
-            </select>
+              {loading ? "Registrando..." : "¡Registrarme!"}
+            </button>
+          </form>
+
+          {/* Footer */}
+          <div className="register__footer">
+            <p className="register__footer-text">
+              ¿Ya tienes cuenta?{" "}
+              <Link to="/login" className="register__footer-link">
+                Inicia sesión aquí
+              </Link>
+            </p>
           </div>
 
-
-          {/* Contraseñas */}
-          <div className="register__row">
-            <div className="register__input-group">
-              <label className="input-label">Contraseña *</label>
-              <input
-                className="input"
-                type="password"
-                name="password"
-                placeholder="Mínimo 6 caracteres"
-                value={form.password}
-                onChange={handleChange}
-                disabled={loading}
-              />
-            </div>
-
-
-            <div className="register__input-group">
-              <label className="input-label">Confirmar Contraseña *</label>
-              <input
-                className="input"
-                type="password"
-                name="confirmPassword"
-                placeholder="Repíte la contraseña"
-                value={form.confirmPassword}
-                onChange={handleChange}
-                disabled={loading}
-              />
-            </div>
-          </div>
-
-
-          {/* Botón de registro */}
-          <button
-            className="btn btn--primary btn--full"
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? "Registrando..." : "¡Registrarme!"}
-          </button>
-        </form>
-
-
-        <div className="register__footer">
-          <p className="register__footer-text">
-            ¿Ya tienes cuenta?{" "}
-            <Link to="/login" className="register__footer-link">
-              Inicia sesión aquí
-            </Link>
-          </p>
         </div>
       </div>
-    </div>
+
+      <Footer />
+    </>
   );
 }
